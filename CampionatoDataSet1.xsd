@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="CampionatoDataSet" targetNamespace="http://tempuri.org/CampionatoDataSet1.xsd" xmlns:mstns="http://tempuri.org/CampionatoDataSet1.xsd" xmlns="http://tempuri.org/CampionatoDataSet1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="CampionatoConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="CampionatoConnectionString (Settings)" PropertyReference="ApplicationSettings.EsISCS.Properties.Settings.GlobalReference.Default.CampionatoConnectionString" Provider="System.Data.OleDb" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="SquadreTableAdapter" GeneratorDataComponentClassName="SquadreTableAdapter" Name="Squadre" UserDataComponentName="SquadreTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="CampionatoConnectionString (Settings)" DbObjectName="Squadre" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Squadra, Giocate, Vinte, Pareggiate, Perse, GolFatti, GolSubiti, Punti, DifferenzaReti FROM Squadre</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Squadra" DataSetColumn="Squadra" />
+              <Mapping SourceColumn="Giocate" DataSetColumn="Giocate" />
+              <Mapping SourceColumn="Vinte" DataSetColumn="Vinte" />
+              <Mapping SourceColumn="Pareggiate" DataSetColumn="Pareggiate" />
+              <Mapping SourceColumn="Perse" DataSetColumn="Perse" />
+              <Mapping SourceColumn="GolFatti" DataSetColumn="GolFatti" />
+              <Mapping SourceColumn="GolSubiti" DataSetColumn="GolSubiti" />
+              <Mapping SourceColumn="Punti" DataSetColumn="Punti" />
+              <Mapping SourceColumn="DifferenzaReti" DataSetColumn="DifferenzaReti" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="CampionatoDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="CampionatoDataSet" msprop:Generator_UserDSName="CampionatoDataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Squadre" msprop:Generator_TableClassName="SquadreDataTable" msprop:Generator_TableVarName="tableSquadre" msprop:Generator_TablePropName="Squadre" msprop:Generator_RowDeletingName="SquadreRowDeleting" msprop:Generator_UserTableName="Squadre" msprop:Generator_RowChangingName="SquadreRowChanging" msprop:Generator_RowEvHandlerName="SquadreRowChangeEventHandler" msprop:Generator_RowDeletedName="SquadreRowDeleted" msprop:Generator_RowEvArgName="SquadreRowChangeEvent" msprop:Generator_RowChangedName="SquadreRowChanged" msprop:Generator_RowClassName="SquadreRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Squadra" msprop:Generator_ColumnVarNameInTable="columnSquadra" msprop:Generator_ColumnPropNameInRow="Squadra" msprop:Generator_ColumnPropNameInTable="SquadraColumn" msprop:Generator_UserColumnName="Squadra" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Giocate" msprop:Generator_ColumnVarNameInTable="columnGiocate" msprop:Generator_ColumnPropNameInRow="Giocate" msprop:Generator_ColumnPropNameInTable="GiocateColumn" msprop:Generator_UserColumnName="Giocate" type="xs:int" minOccurs="0" />
+              <xs:element name="Vinte" msprop:Generator_ColumnVarNameInTable="columnVinte" msprop:Generator_ColumnPropNameInRow="Vinte" msprop:Generator_ColumnPropNameInTable="VinteColumn" msprop:Generator_UserColumnName="Vinte" type="xs:int" minOccurs="0" />
+              <xs:element name="Pareggiate" msprop:Generator_ColumnVarNameInTable="columnPareggiate" msprop:Generator_ColumnPropNameInRow="Pareggiate" msprop:Generator_ColumnPropNameInTable="PareggiateColumn" msprop:Generator_UserColumnName="Pareggiate" type="xs:int" minOccurs="0" />
+              <xs:element name="Perse" msprop:Generator_ColumnVarNameInTable="columnPerse" msprop:Generator_ColumnPropNameInRow="Perse" msprop:Generator_ColumnPropNameInTable="PerseColumn" msprop:Generator_UserColumnName="Perse" type="xs:int" minOccurs="0" />
+              <xs:element name="GolFatti" msprop:Generator_ColumnVarNameInTable="columnGolFatti" msprop:Generator_ColumnPropNameInRow="GolFatti" msprop:Generator_ColumnPropNameInTable="GolFattiColumn" msprop:Generator_UserColumnName="GolFatti" type="xs:int" minOccurs="0" />
+              <xs:element name="GolSubiti" msprop:Generator_ColumnVarNameInTable="columnGolSubiti" msprop:Generator_ColumnPropNameInRow="GolSubiti" msprop:Generator_ColumnPropNameInTable="GolSubitiColumn" msprop:Generator_UserColumnName="GolSubiti" type="xs:int" minOccurs="0" />
+              <xs:element name="Punti" msprop:Generator_ColumnVarNameInTable="columnPunti" msprop:Generator_ColumnPropNameInRow="Punti" msprop:Generator_ColumnPropNameInTable="PuntiColumn" msprop:Generator_UserColumnName="Punti" type="xs:int" minOccurs="0" />
+              <xs:element name="DifferenzaReti" msprop:Generator_ColumnVarNameInTable="columnDifferenzaReti" msprop:Generator_ColumnPropNameInRow="DifferenzaReti" msprop:Generator_ColumnPropNameInTable="DifferenzaRetiColumn" msprop:Generator_UserColumnName="DifferenzaReti" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
