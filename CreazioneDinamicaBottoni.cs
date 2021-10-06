@@ -25,3 +25,27 @@ private void cmb_SelectedIndexChanged(object sender, EventArgs e)
 {
     MessageBox.Show(((ComboBox)sender).SelectedItem.ToString(),"Messaggio");
 }
+protected EventHandler OnClickHandler = new EventHandler(OnClick);
+
+btnUno.Click += OnClickHandler;
+btnDue.Click += OnClickHandler;
+btnTre.Click += OnClickHandler;
+public static void OnClick(object sender,EventArgs e)
+{
+    if (sender is Button)
+    {
+        {Button btnClick=(Button)sender;
+        switch(btnClick.Name)
+        {
+            case "btnUno":
+                //Codice da gestire per il bottone
+                break;
+            case "btnDue":
+                //Codice da gestire per il bottone
+                break;
+            case "btnTre":
+                //Codice da gestire per il bottone
+                break;
+        }
+    }
+}
