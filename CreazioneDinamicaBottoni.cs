@@ -8,3 +8,16 @@ private void CreaBottone()
     btn.Click += new System.EventHandler(this.btn_Click);                                   //Registro l'evento 
     Controls.Add (btn);
 }
+
+private void btn_Click(object sender, EventArgs e)
+{
+    ComboBox cmb = new ComboBox();
+    cmb.BackColor = System.Drawing.Color.White;
+    cmb.Top = 50;
+    cmb.Left = 150;
+    cmb.Items.Add("Alessandro");
+    cmb.Items.Add("Andrea");
+    cmb.Items.Add("Massimo");
+    cmb.SelectedIndexChanged += new System.EventHandler(this.cmb_SelectedIndexChanged);     //Registro l'evento
+    Controls.Add (cmb);
+}
