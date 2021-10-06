@@ -21,3 +21,7 @@ private void btn_Click(object sender, EventArgs e)
     cmb.SelectedIndexChanged += new System.EventHandler(this.cmb_SelectedIndexChanged);     //Registro l'evento
     Controls.Add (cmb);
 }
+private void cmb_SelectedIndexChanged(object sender, EventArgs e)
+{
+    MessageBox.Show(((ComboBox)sender).SelectedItem.ToString(),"Messaggio");
+}
