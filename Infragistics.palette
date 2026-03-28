@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<IgPalettes>	
+	<IgPalette name="Palette 1 ">
+		<Color>#D47757</Color>
+		<Color>#AF1C3D</Color>
+		<Color>#FF5D17</Color>
+		<Color>#DBD6C6</Color>
+	</IgPalette>
+	<IgPalette name="Palette 2 ">
+		<Color>#2F2A33</Color>
+		<Color>#234679</Color>
+		<Color>#FFFFFF</Color>
+		<Color>#CC302D</Color>
+	</IgPalette>
+	<IgPalette name="Palette 3 ">
+		<Color>#F7D4EC</Color>
+		<Color>#D4F0F7</Color>
+		<Color>#FFFFFF</Color>
+		<Color>#CC302D</Color>
+	</IgPalette>
+	<IgPalette name="Palette 4 ">
+		<Color>#522B17</Color>
+		<Color>#D1C885</Color>
+		<Color>#5B6056</Color>
+		<Color>#C35417</Color>
+	</IgPalette>
+	<IgPalette name="Palette 5 ">
+		<Color>#BDBDBD</Color>
+		<Color>#F0E4D8</Color>
+		<Color>#594735</Color>
+		<Color>#69BFDD</Color>
+	</IgPalette>
+	<IgPalette name="Palette 6 ">
+		<Color>#69850B</Color>
+		<Color>#E82F00</Color>
+		<Color>#FDBF44</Color>
+		<Color>#FDBF44</Color>
+	</IgPalette>
+	<IgPalette name="Palette 7 ">
+		<Color>#2A1811</Color>
+		<Color>#5D4F1D</Color>
+		<Color>#908A76</Color>
+		<Color>#901708</Color>
+	</IgPalette>
+	<IgPalette name="Palette 8 ">
+		<Color>#A5CC7A</Color>
+		<Color>#1B5790</Color>
+		<Color>#E96500</Color>
+		<Color>#FFEFA3</Color>
+	</IgPalette>
+	<IgPalette name="Palette 9 ">
+		<Color>#0099FF</Color>
+		<Color>#7CAC1B</Color>
+		<Color>#A54219</Color>
+		<Color>#00333F</Color>
+	</IgPalette>
+	<IgPalette name="Palette 10 ">
+		<Color>#912573</Color>
+		<Color>#3CB1FF</Color>
+		<Color>#BBC0BA</Color>
+		<Color>#BFB694</Color>
+	</IgPalette>
+	<IgPalette name="Palette 11 ">
+		<Color>#666666</Color>
+		<Color>#ABECF5</Color>
+		<Color>#FFB700</Color>
+		<Color>#696B46</Color>
+	</IgPalette>
+	<IgPalette name="Palette 12 ">
+		<Color>#FFFFE6</Color>
+		<Color>#666666</Color>
+		<Color>#FF8400</Color>
+		<Color>#004659</Color>
+	</IgPalette>
+	<IgPalette name="Palette 13 ">
+		<Color>#CE7567</Color>
+		<Color>#7EC2B5</Color>
+		<Color>#C2DD2E</Color>
+		<Color>#698385</Color>
+	</IgPalette>
+	<IgPalette name="Palette 14 ">
+		<Color>#FCD683</Color>
+		<Color>#D95E70</Color>
+		<Color>#774DA1</Color>
+		<Color>#BCB670</Color>
+	</IgPalette>
+	<IgPalette name="Palette 15 ">
+		<Color>#000000</Color>
+		<Color>#FF348A</Color>
+		<Color>#01AFEF</Color>
+		<Color>#FFFFCC</Color>
+	</IgPalette>
+	<IgPalette name="Palette 16 ">
+		<Color>#FDE691</Color>
+		<Color>#467724</Color>
+		<Color>#591F00</Color>
+		<Color>#389AAA</Color>
+	</IgPalette>
+	<IgPalette name="Palette 17 ">
+		<Color>#F4F6D4</Color>
+		<Color>#A7C41F</Color>
+		<Color>#493F0B</Color>
+		<Color>#54ACCC</Color>
+	</IgPalette>
+	<IgPalette name="Palette 18 ">
+		<Color>#E4E2C6</Color>
+		<Color>#3F3D36</Color>
+		<Color>#BFBCA5</Color>
+		<Color>#BA9A64</Color>
+	</IgPalette>
+	<IgPalette name="Palette 19 ">
+		<Color>#21262A</Color>
+		<Color>#4D871A</Color>
+		<Color>#383111</Color>
+		<Color>#240433</Color>
+	</IgPalette>
+	<IgPalette name="Palette 20 ">
+		<Color>#52384D</Color>
+		<Color>#FFF4D1</Color>
+		<Color>#BCA39A</Color>
+		<Color>#2F3A0E</Color>
+	</IgPalette>
+	<IgPalette name="Palette 21 ">
+		<Color>#70773B</Color>
+		<Color>#DD8E15</Color>
+		<Color>#0097AA</Color>
+		<Color>#FF2862</Color>
+	</IgPalette>
+	<IgPalette name="Palette 22 ">
+		<Color>#D4EDD6</Color>
+		<Color>#000000</Color>
+		<Color>#EB2126</Color>
+		<Color>#FFDD3D</Color>
+	</IgPalette>
+	<IgPalette name="Palette 23 ">
+		<Color>#8E0D00</Color>
+		<Color>#538C7A</Color>
+		<Color>#726C50</Color>
+		<Color>#2F3A0E</Color>
+	</IgPalette>
+	<IgPalette name="Palette 24 ">
+		<Color>#F791C7</Color>
+		<Color>#BCD326</Color>
+		<Color>#BED2D3</Color>
+		<Color>#54ACCC</Color>
+	</IgPalette>
+	<IgPalette name="Palette 25 ">
+		<Color>#DDA849</Color>
+		<Color>#707742</Color>
+		<Color>#389AAA</Color>
+		<Color>#89725B</Color>
+	</IgPalette>
+	<IgPalette name="Palette 26 ">
+		<Color>#996633</Color>
+		<Color>#333333</Color>
+		<Color>#CCCC99</Color>
+		<Color>#3C656B</Color>
+	</IgPalette>
+	<IgPalette name="Palette 27 ">
+		<Color>#C32F00</Color>
+		<Color>#FFF9D4</Color>
+		<Color>#1F2123</Color>
+		<Color>#A38D53</Color>
+	</IgPalette>
+	<IgPalette name="Palette 28 ">
+		<Color>#1A171F</Color>
+		<Color>#4F6064</Color>
+		<Color>#99CFD1</Color>
+		<Color>#BACC90</Color>
+	</IgPalette>
+	<IgPalette name="Palette 29 ">
+		<Color>#FF8200</Color>
+		<Color>#B19A82</Color>
+		<Color>#00AAB1</Color>
+		<Color>#002662</Color>
+	</IgPalette>
+	<IgPalette name="Palette 30 ">
+		<Color>#1F2123</Color>
+		<Color>#A88A5B</Color>
+		<Color>#7E8C54</Color>
+		<Color>#F6E6B1</Color>
+	</IgPalette>
+	<IgPalette name="Palette 31 ">
+		<Color>#77011C</Color>
+		<Color>#EBCDC6</Color>
+		<Color>#492614</Color>
+		<Color>#AF1C3D</Color>
+	</IgPalette>
+	<IgPalette name="Palette 32 ">
+		<Color>#D1E9DB</Color>
+		<Color>#FFE850</Color>
+		<Color>#FFCDE1</Color>
+		<Color>#62340E</Color>
+	</IgPalette>
+	<IgPalette name="Palette 33 ">
+		<Color>#E62FC6</Color>
+		<Color>#31BDE6</Color>
+		<Color>#31A0FF</Color>
+		<Color>#AF1C3D</Color>
+	</IgPalette>
+	<IgPalette name="Palette 34 ">
+		<Color>#594735</Color>
+		<Color>#BDBDBD</Color>
+		<Color>#D8F0E3</Color>
+		<Color>#9797B1</Color>
+	</IgPalette>
+	<IgPalette name="Palette 35 ">
+		<Color>#7E89A1</Color>
+		<Color>#FFFFFF</Color>
+		<Color>#FF9700</Color>
+		<Color>#676223</Color>
+	</IgPalette>
+	<IgPalette name="Palette 36 ">
+		<Color>#04726B</Color>
+		<Color>#F9CC99</Color>
+		<Color>#0866B6</Color>
+		<Color>#EDDAC0</Color>
+	</IgPalette>
+	<IgPalette name="Palette 37 ">
+		<Color>#FF5446</Color>
+		<Color>#2A3331</Color>
+		<Color>#0E5D49</Color>
+		<Color>#A38D53</Color>
+	</IgPalette>
+	<IgPalette name="Palette 38 ">
+		<Color>#FFCE60</Color>
+		<Color>#8C1A00</Color>
+		<Color>#120101</Color>
+		<Color>#AE626B</Color>
+	</IgPalette>
+	<IgPalette name="Palette 39 ">
+		<Color>#DFD8C8</Color>
+		<Color>#975911</Color>
+		<Color>#9A3F07</Color>
+		<Color>#F2DBD3</Color>
+	</IgPalette>
+	<IgPalette name="Palette 40 ">
+		<Color>#D66682</Color>
+		<Color>#EDDDD4</Color>
+		<Color>#CD9A64</Color>
+		<Color>#80A59C</Color>
+	</IgPalette>
+	<IgPalette name="Palette 41 ">
+		<Color>#676E75</Color>
+		<Color>#E4F0DB</Color>
+		<Color>#AAC19A</Color>
+		<Color>#544C3D</Color>
+	</IgPalette>
+	<IgPalette name="Palette 42 ">
+		<Color>#FFFBFB</Color>
+		<Color>#B12F34</Color>
+		<Color>#93B1B1</Color>
+		<Color>#6B6B6B</Color>
+	</IgPalette>
+	<IgPalette name="Palette 43 ">
+		<Color>#CCBD5D</Color>
+		<Color>#999374</Color>
+		<Color>#B8F6FF</Color>
+		<Color>#A57C6E</Color>
+	</IgPalette>
+	<IgPalette name="Palette 44 ">
+		<Color>#D4CA28</Color>
+		<Color>#9756F0</Color>
+		<Color>#62240B</Color>
+		<Color>#FFDF04</Color>
+	</IgPalette>
+	<IgPalette name="Palette 45 ">
+		<Color>#52413B</Color>
+		<Color>#5E6079</Color>
+		<Color>#213446</Color>
+		<Color>#80A59C</Color>
+	</IgPalette>
+	<IgPalette name="Palette 46 ">
+		<Color>#E9E9E9</Color>
+		<Color>#AE626B</Color>
+		<Color>#620E1A</Color>
+		<Color>#6B6B6B</Color>
+	</IgPalette>
+	<IgPalette name="Palette 47 ">
+		<Color>#B1AFAE</Color>
+		<Color>#FF9700</Color>
+		<Color>#FFFBF9</Color>
+		<Color>#CA3895</Color>
+	</IgPalette>
+	<IgPalette name="Palette 48 ">
+		<Color>#838766</Color>
+		<Color>#E6D6B6</Color>
+		<Color>#E1F9FF</Color>
+		<Color>#B88C4E</Color>
+	</IgPalette>
+	<IgPalette name="Palette 49 ">
+		<Color>#46E61D</Color>
+		<Color>#E66B1F</Color>
+		<Color>#FBED2F</Color>
+		<Color>#CC2321</Color>
+	</IgPalette>
+	<IgPalette name="Palette 50 ">
+		<Color>#175D82</Color>
+		<Color>#FFFFFF</Color>
+		<Color>#D82323</Color>
+		<Color>#62340E</Color>
+	</IgPalette>
+</IgPalettes>
