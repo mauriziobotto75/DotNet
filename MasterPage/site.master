@@ -1,0 +1,53 @@
+<%@ Master Language="C#" AutoEventWireup="true"
+    CodeFile="Site.master.cs" Inherits="MasterPages_Site" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <title>Polo Formativo Regione Piemonte</title>
+    <style>
+        body { font-family: Arial; }
+        .header { background: #003366; color: white; padding: 10px; }
+        .menu { background: #eeeeee; padding: 5px; }
+        .content { padding: 15px; }
+        .footer { background: #003366; color: white; padding: 5px; }
+    </style>
+</head>
+
+<body>
+<form runat="server">
+
+<div class="header">
+    Polo Formativo – Regione Piemonte
+    <span style="float:right">
+        Utente:
+        <asp:Label ID="lblUser" runat="server" />
+        |
+        <asp:LinkButton ID="lnkLogout" runat="server"
+            Text="Logout" OnClick="Logout_Click" />
+    </span>
+</div>
+
+<div class="menu">
+    <asp:Menu ID="menu" runat="server" Orientation="Horizontal">
+        <Items>
+            <asp:MenuItem Text="Home" NavigateUrl="~/Default.aspx" />
+            <asp:MenuItem Text="Persone" NavigateUrl="~/Persone/Persone.aspx" />
+            <asp:MenuItem Text="Utenti" NavigateUrl="~/Sicurezza/Utenti.aspx" />
+            <asp:MenuItem Text="Ruoli" NavigateUrl="~/Sicurezza/Ruoli.aspx" />
+            <asp:MenuItem Text="Diritti" NavigateUrl="~/Sicurezza/Diritti.aspx" />
+        </Items>
+    </asp:Menu>
+</div>
+
+<div class="content">
+    <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+</div>
+
+<div class="footer">
+    © Regione Piemonte
+</div>
+
+</form>
+</body>
+</html>
