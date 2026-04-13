@@ -1,0 +1,3 @@
+Audit.Log("INSERT", "Persone", idPersona.ToString());
+Audit.Log("LOGIN", "UTENTI", idUtente.ToString());
+Audit.Log("ACCESSO_ADMIN", null, null);
