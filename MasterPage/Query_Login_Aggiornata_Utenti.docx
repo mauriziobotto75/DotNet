@@ -1,0 +1,7 @@
+cmd = new SqlCommand(@"
+SELECT U.IdUtente, U.IdRuolo
+FROM UTENTI U
+WHERE Username=@u AND Password=@p AND Attivo=1", cn);
+
+cmd.Parameters.AddWithValue("@u", txtUser.Text);
+cmd.Parameters.AddWithValue("@p", Crypto.SHA1Hash(txtPwd.Text));
