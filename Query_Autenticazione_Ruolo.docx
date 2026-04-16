@@ -1,0 +1,5 @@
+SELECT U.IdUtente, U.IdRuolo
+FROM UTENTI U
+WHERE U.Username=@u
+AND U.Password=@p
+AND U.Attivo=1
