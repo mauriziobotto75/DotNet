@@ -1,0 +1,73 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="InserimentoComitati.aspx.cs" Inherits="GestioneFormazione.InserimentoComitati" %>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Inserimento Comitati</title>
+    <style>
+        .form-container {
+            width: 600px;
+            margin: 40px auto;
+            padding: 20px;
+            border: 2px solid #444;
+            background-color: #f4f4f4;
+            font-family: Arial;
+        }
+        .form-row {
+            margin-bottom: 15px;
+        }
+        .form-label {
+            display: inline-block;
+            width: 150px;
+        }
+        .form-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-left: 20px;
+        }
+        .form-main {
+            display: flex;
+            justify-content: space-between;
+        }
+        .submit-button {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="form-container">
+            <h2>Inserimento Comitato</h2>
+            <div class="form-main">
+                <div>
+                    <div class="form-row">
+                        <span class="form-label">Nome Comitato:</span>
+                        <asp:TextBox ID="txtNomeComitato" runat="server" Width="300px" />
+                    </div>
+                    <div class="form-row">
+                        <span class="form-label">Descrizione:</span>
+                        <asp:TextBox ID="txtDescrizione" runat="server" Width="300px" TextMode="MultiLine" Rows="3" />
+                    </div>
+                    <div class="form-row">
+                        <span class="form-label">Partner:</span>
+                        <asp:DropDownList ID="ddlPartner" runat="server" Width="300px" />
+                    </div>
+                </div>
+                <div class="form-buttons">
+                    <asp:Button ID="btnModifica" runat="server" Text="Modifica" />
+                    <asp:Button ID="btnAnnulla" runat="server" Text="Annulla" />
+                    <asp:Button ID="btnVisualizza" runat="server" Text="Visualizza" />
+                    <asp:Button ID="btnCancella" runat="server" Text="Cancella" />
+                </div>
+            </div>
+            <div class="submit-button">
+                <asp:Button ID="btnAggiungi" runat="server" Text="Aggiungi" />
+            </div>
+        </div>
+    </form>
+</body>
+</html>
+ 
+         
