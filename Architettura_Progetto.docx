@@ -1,0 +1,24 @@
+/App_Code
+    Db.cs
+    Auth.cs
+
+/Handlers
+    Immagine.ashx
+
+/MasterPages
+    Site.master
+
+/Utenti
+    Login.aspx
+    Utenti.aspx
+
+/Persone
+    Persone.aspx
+    PersonaEdit.aspx
+
+/Enti
+    Enti.aspx
+
+/Corsi
+    Corsi.aspx
+    CorsoEdit.aspx
