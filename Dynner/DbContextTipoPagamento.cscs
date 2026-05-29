@@ -1,0 +1,3 @@
+
+public DbSet<Pagamento> Pagamenti { get; set; }
+public DbSet<TipoPagamento> TipiPagamento { get; set; }
