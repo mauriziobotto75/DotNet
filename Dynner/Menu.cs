@@ -1,0 +1,8 @@
+public class Menu
+{
+    public int Id { get; set; }
+    public string Nome { get; set; }
+
+    public virtual ICollection<MenuProdotto> Prodotti { get; set; }
+}
+
