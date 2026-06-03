@@ -1,23 +1,72 @@
-var db = new RistorazioneEntities();
-var prodotti = db.Prodotti.ToList();
-private void btnConto_Click(object sender, EventArgs e)
-{
-    int idComanda = _comanda.Id;
+ using System;
+using System.Linq;
+using System.Windows.Forms;
 
-    FormConto frm = new FormConto(idComanda);
-    frm.ShowDialog();
-}
-private void ApriMenu()
+namespace RistorazionePOS
 {
-    FormMenu frm = new FormMenu();
-
-    frm.OnProdottoSelezionato += (prodotto) =>
+    public partial class FormComanda : Form
     {
-        var service = new ComandaService(_db);
-        service.AggiungiProdotto(_comanda, prodotto);
+        private RistorazioneEntities _db;
+        private Comande _comanda;
+        private ComandaService _service;
 
-        RefreshGrid();
-    };
+        public FormComanda()
+        {
+            InitializeComponent();
 
-    frm.ShowDialog();
+            _db = new RistorazioneEntities();
+            _service = new ComandaService(_db);
+        }
+
+        private void FormComanda_Load(object sender, EventArgs e)
+        {
+            _comanda = _service.CreaNuova();
+
+            CaricaProdotti();
+        }
+
+        private void CaricaProdotti()
+        {
+            var prodotti = _db.Prodotti.ToList();
+
+            flowLayoutPanel1.Controls.Clear();
+
+            foreach (var p in prodotti)
+            {
+                var btn = new Button
+                {
+                    Text = p.Nome,
+                    Width = 120,
+                    Height = 60
+                };
+
+                btn.Click += (s, ev) =>
+                {
+                    _service.AggiungiProdotto(_comanda, p);
+                    RefreshGrid();
+                };
+
+                flowLayoutPanel1.Controls.Add(btn);
+            }
+        }
+
+        private void RefreshGrid()
+        {
+            dgv.DataSource = null;
+
+            dgv.DataSource = _comanda.Comande_Dettaglio
+                .Select(d => new
+                {
+                    Qta = d.Quantita,
+                    Nome = d.Prodotti.Nome,
+                    Prezzo = d.Prezzo,
+                    Importo = d.Importo
+                }).ToList();
+        }
+
+        private void btnConto_Click(object sender, EventArgs e)
+        {
+            new FormConto(_comanda.Id).ShowDialog();
+        }
+    }
 }
