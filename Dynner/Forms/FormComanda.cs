@@ -1,4 +1,5 @@
-
+var db = new RistorazioneEntities();
+var prodotti = db.Prodotti.ToList();
 private void btnConto_Click(object sender, EventArgs e)
 {
     int idComanda = _comanda.Id;
