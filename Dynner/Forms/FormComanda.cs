@@ -6,3 +6,17 @@ private void btnConto_Click(object sender, EventArgs e)
     FormConto frm = new FormConto(idComanda);
     frm.ShowDialog();
 }
+private void ApriMenu()
+{
+    FormMenu frm = new FormMenu();
+
+    frm.OnProdottoSelezionato += (prodotto) =>
+    {
+        var service = new ComandaService(_db);
+        service.AggiungiProdotto(_comanda, prodotto);
+
+        RefreshGrid();
+    };
+
+    frm.ShowDialog();
+}
