@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0"
+ xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+
+  <edmx:Runtime>
+
+    <!-- CSDL -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RistorazioneModel"
+              xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+
+        <!-- COMANDE -->
+        <EntityType Name="Comande">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Data" Type="DateTime" />
+          <Property Name="TavoloId" Type="Int32" />
+          <Property Name="Totale" Type="Decimal" Precision="10" Scale="2" />
+        </EntityType>
+
+        <!-- DETTAGLIO -->
+        <EntityType Name="Comande_Dettaglio">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false"/>
+          <Property Name="ComandaId" Type="Int32" />
+          <Property Name="ProdottoId" Type="Int32" />
+          <Property Name="Quantita" Type="Int32" />
+          <Property Name="Prezzo" Type="Decimal" Precision="10" Scale="2"/>
+          <Property Name="Importo" Type="Decimal" Precision="10" Scale="2"/>
+        </EntityType>
+
+        <!-- PRODOTTI -->
+        <EntityType Name="Prodotti">
+          <Key>
+            <PropertyRef Name="Id"/>
+          </Key>
+          <Property Name="Id" Type="Int32"/>
+          <Property Name="Nome" Type="String"/>
+          <Property Name="Prezzo" Type="Decimal" Precision="10" Scale="2"/>
+        </EntityType>
+
+        <!-- MENU -->
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="Id"/>
+          </Key>
+          <Property Name="Id" Type="Int32"/>
+          <Property Name="Nome" Type="String"/>
+          <Property Name="Prezzo" Type="Decimal" />
+        </EntityType>
+
+        <!-- MENU_PRODOTTI -->
+        <EntityType Name="Menu_Prodotti">
+          <Key>
+            <PropertyRef Name="Id"/>
+          </Key>
+          <Property Name="Id" Type="Int32"/>
+          <Property Name="MenuId" Type="Int32"/>
+          <Property Name="ProdottoId" Type="Int32"/>
+        </EntityType>
+
+        <!-- PAGAMENTI -->
+        <EntityType Name="Pagamenti">
+          <Key>
+            <PropertyRef Name="Id"/>
+          </Key>
+          <Property Name="Id" Type="Int32"/>
+          <Property Name="ComandaId" Type="Int32"/>
+          <Property Name="Totale" Type="Decimal"/>
+          <Property Name="ImportoPagato" Type="Decimal"/>
+        </EntityType>
+
+      </Schema>
+    </edmx:ConceptualModels>
+
+    <!-- SSDL -->
+    <edmx:StorageModels>
+      <Schema Namespace="RistorazioneModel.Store"
+              Provider="System.Data.SqlClient"
+              xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+
+        <EntityType Name="Comande">
+          <Key>
+            <PropertyRef Name="Id"/>
+          </Key>
+          <Property Name="Id" Type="int"/>
+        </EntityType>
+
+      </Schema>
+    </edmx:StorageModels>
+
+    <!-- MAPPING -->
+    <edmx:Mappings>
+      <Mapping Space="C-S"
+               xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+      </Mapping>
+    </edmx:Mappings>
+
+  </edmx:Runtime>
+
+  <edmx:Designer>
+  </edmx:Designer>
+
+</edmx:Edmx>
