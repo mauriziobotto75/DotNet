@@ -73,27 +73,32 @@ db.SaveChanges(); // ← crea ID reale
 
         pnlProdotti.Controls.Add(btn);
     } 
-        private void AggiungiProdotto(Prodotto p)
+ private void AggiungiProdotto(Prodotto p)
 {
-    var esistente = _comandaCorrente.Dettagli
-        .FirstOrDefault(d => d.ProdottoId == p.Id);
+    var riga = db.ComandeDettagli
+        .FirstOrDefault(x => x.ComandaId == comanda.Id && x.ProdottoId == p.Id);
 
-    if (esistente != null)
+    if (riga != null)
     {
-        esistente.Quantita++;
-        esistente.Importo = esistente.Quantita * esistente.Prezzo;
+        riga.Quantita++;
+        riga.Importo = riga.Quantita * riga.Prezzo;
     }
     else
     {
-        _comandaCorrente.Dettagli.Add(new ComandaDettaglio
+        db.ComandeDettagli.Add(new ComandaDettaglio
         {
+            ComandaId = comanda.Id,
             ProdottoId = p.Id,
-            Prodotto = p,
             Quantita = 1,
             Prezzo = p.Prezzo,
             Importo = p.Prezzo
         });
     }
+
+    db.SaveChanges();
+
+    CaricaDettagli();
+}
 
     RefreshGrid();
     AggiornaTotale();
