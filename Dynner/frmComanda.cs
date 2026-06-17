@@ -18,13 +18,20 @@ private void NuovaComanda()
 private int? _comandaId;
 
 public FormComanda(int tavoloId, int? comandaId = null)
+{ if (_comandaId != null)
 {
+    comanda = db.Comande.Find(_comandaId);
+}
+else
+{
+    // crea nuova
+
     InitializeComponent();
 
     _tavoloId = tavoloId;
     _comandaId = comandaId;
     db = new RistorazioneContext();
-}
+} }
 private void ApriComanda(Tavolo tavolo)
 {
     var c = db.Comande
