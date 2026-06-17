@@ -15,6 +15,16 @@ private void NuovaComanda()
     dgvComanda.DataSource = _comandaCorrente.Dettagli.ToList();
     AggiornaTotale();
 }
+private int? _comandaId;
+
+public FormComanda(int tavoloId, int? comandaId = null)
+{
+    InitializeComponent();
+
+    _tavoloId = tavoloId;
+    _comandaId = comandaId;
+    db = new RistorazioneContext();
+}
 private void ApriComanda(Tavolo tavolo)
 {
     var c = db.Comande
