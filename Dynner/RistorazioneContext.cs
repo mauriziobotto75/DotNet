@@ -11,4 +11,10 @@ public class RistorazioneContext : DbContext
     public DbSet<Menu> Menu { get; set; }
     public DbSet<MenuProdotto> MenuProdotti { get; set; }
 }
-``
+protected override void OnModelCreating(System.Data.Entity.DbModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<Comanda>()
+        .HasMany(c => c.Dettagli)
+        .WithRequired()
+        .HasForeignKey(d => d.ComandaId);
+}
