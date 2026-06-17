@@ -27,6 +27,21 @@ private void NuovaComanda()
     dgvComanda.DataSource = _comandaCorrente.Dettagli.ToList();
     AggiornaTotale();
 } 
+private void CaricaDettagli()
+{
+    dgv.DataSource = null;
+
+    var righe = db.ComandeDettagli
+        .Where(x => x.ComandaId == comanda.Id)
+        .Select(x => new
+        {
+            x.Quantita,
+            Nome = x.Prodotto.Nome,
+            x.Importo
+        }).ToList();
+
+    dgv.DataSource = righe;
+}
 private void CaricaCategorie()
 {
     var categorie = _db.Menu.ToList();
