@@ -15,6 +15,22 @@ private void NuovaComanda()
     dgvComanda.DataSource = _comandaCorrente.Dettagli.ToList();
     AggiornaTotale();
 }
+private void ApriComanda(Tavolo tavolo)
+{
+    var c = db.Comande
+        .FirstOrDefault(x => x.TavoloId == tavolo.Id);
+
+    if (c == null)
+    {
+        FormComanda f = new FormComanda(tavolo.Id);
+        f.ShowDialog();
+    }
+    else
+    {
+        FormComanda f = new FormComanda(tavolo.Id, c.Id);
+        f.ShowDialog();
+    }
+}
 private void NuovaComanda()
 {
     _comandaCorrente = new Comanda
