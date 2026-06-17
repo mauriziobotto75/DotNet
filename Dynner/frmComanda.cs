@@ -44,6 +44,15 @@ private void CaricaCategorie()
 
         pnlCategorie.Controls.Add(btn);
     } 
+    comanda = new Comanda
+{
+    Data = DateTime.Now,
+    TavoloId = _tavoloId,
+    Dettagli = new List<ComandaDettaglio>()
+};
+
+db.Comande.Add(comanda);
+db.SaveChanges(); // ← crea ID reale
     private void CaricaProdotti(int menuId)
 {
     var prodotti = _db.MenuProdotti
