@@ -1,0 +1,194 @@
+MainWindow.xaml
+
+xaml
+<Window x:Class="JokeGenerator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d"
+        Title="Random Joke Generator" Height="600" Width="700" 
+        WindowStartupLocation="CenterScreen" 
+        Background="LinearGradient(90deg, #667eea 0%, #764ba2 100%)">
+    
+    <Grid Background="#f0f2f5">
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Width="600">
+            
+            <!-- Header -->
+            <TextBlock Text="😂 Random Joke Generator 😂" 
+                       FontSize="32" 
+                       FontWeight="Bold" 
+                       Foreground="#667eea"
+                       TextAlignment="Center" 
+                       Margin="0,0,0,30"/>
+
+            <!-- Joke Display Box -->
+            <Border BorderBrush="#667eea" BorderThickness="2" CornerRadius="10" Padding="20" Background="White" Margin="0,0,0,20">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="200">
+                    <TextBlock Text="{Binding CurrentJoke}" 
+                               FontSize="18" 
+                               Foreground="#333"
+                               TextWrapping="Wrap"
+                               LineHeight="28"/>
+                </ScrollViewer>
+            </Border>
+
+            <!-- Category and Counter -->
+            <Grid Margin="0,0,0,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="Category:" FontSize="12" Foreground="#666" Margin="0,0,0,5"/>
+                    <TextBlock Text="{Binding JokeCategory}" 
+                               FontSize="14" 
+                               Foreground="#667eea" 
+                               FontWeight="Bold"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" HorizontalAlignment="Right">
+                    <TextBlock Text="Jokes Loaded:" FontSize="12" Foreground="#666" Margin="0,0,0,5"/>
+                    <TextBlock Text="{Binding JokeCount}" 
+                               FontSize="14" 
+                               Foreground="#764ba2" 
+                               FontWeight="Bold"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- Category Selection -->
+            <StackPanel Margin="0,0,0,20">
+                <TextBlock Text="Select Category:" FontSize="12" Foreground="#666" Margin="0,0,0,8"/>
+                <ComboBox SelectedItem="{Binding JokeCategory}" 
+                         Height="40" 
+                         FontSize="14"
+                         Padding="10">
+                    <ComboBoxItem>general</ComboBoxItem>
+                    <ComboBoxItem>programming</ComboBoxItem>
+                    <ComboBoxItem>knock-knock</ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+
+            <!-- Buttons -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
+                <Button Command="{Binding GetJokeCommand}" 
+                       Width="140" 
+                       Height="45" 
+                       Margin="0,0,10,0"
+                       Background="#667eea"
+                       Foreground="White"
+                       FontSize="14"
+                       FontWeight="Bold"
+                       Cursor="Hand"
+                       Content="Get Random Joke">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}" 
+                                               CornerRadius="5" 
+                                               Padding="10">
+                                            <ContentPresenter VerticalAlignment="Center" 
+                                                            HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#764ba2"/>
+                            </Trigger>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                <Button Command="{Binding GetJokeByCategoryCommand}" 
+                       Width="140" 
+                       Height="45"
+                       Margin="0,0,10,0"
+                       Background="#764ba2"
+                       Foreground="White"
+                       FontSize="14"
+                       FontWeight="Bold"
+                       Cursor="Hand"
+                       Content="Get Category Joke">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}" 
+                                               CornerRadius="5" 
+                                               Padding="10">
+                                            <ContentPresenter VerticalAlignment="Center" 
+                                                            HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#667eea"/>
+                            </Trigger>
+                        </Style>
+                    </Button.Style>
+                </Button>
+
+                <Button Command="{Binding ClearCommand}" 
+                       Width="100" 
+                       Height="45"
+                       Background="#e74c3c"
+                       Foreground="White"
+                       FontSize="14"
+                       FontWeight="Bold"
+                       Cursor="Hand"
+                       Content="Clear">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border Background="{TemplateBinding Background}" 
+                                               CornerRadius="5" 
+                                               Padding="10">
+                                            <ContentPresenter VerticalAlignment="Center" 
+                                                            HorizontalAlignment="Center"/>
+                                        </Border>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#c0392b"/>
+                            </Trigger>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </StackPanel>
+
+            <!-- Loading Indicator -->
+            <TextBlock Text="Loading..." 
+                      FontSize="14" 
+                      Foreground="#667eea"
+                      TextAlignment="Center"
+                      Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibilityConverter}}"
+                      Margin="0,0,0,10"/>
+
+            <!-- Error Message -->
+            <Border BorderBrush="#e74c3c" BorderThickness="1" CornerRadius="5" Padding="10" Background="#fadbd8" 
+                   Visibility="{Binding ErrorMessage, Converter={StaticResource StringToVisibilityConverter}}"
+                   Margin="0,0,0,10">
+                <TextBlock Text="{Binding ErrorMessage}" 
+                          Foreground="#c0392b"
+                          FontSize="12"
+                          TextWrapping="Wrap"/>
+            </Border>
+
+            <!-- Footer -->
+            <TextBlock Text="Powered by API Ninjas" 
+                      FontSize="11" 
+                      Foreground="#999"
+                      TextAlignment="Center"
+                      Margin="0,10,0,0"/>
+        </StackPanel>
+    </Grid>
+</Window>
