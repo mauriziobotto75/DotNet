@@ -1,0 +1,11 @@
+<UserControl x:Class="ClienteView"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    
+    <StackPanel>
+        <Button Content="Carica" Command="{Binding LoadCommand}" />
+        <Button Content="Aggiungi" Command="{Binding AddCommand}" />
+
+        <DataGrid ItemsSource="{Binding Clienti}" AutoGenerateColumns="True"/>
+    </StackPanel>
+
+</UserControl>
