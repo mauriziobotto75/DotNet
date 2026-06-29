@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 
+// repository con gestione dell'aggiunta e visualizzazione del cliente
+
 public class ClienteRepository
 {
     private DatabaseConnection db = new DatabaseConnection();
