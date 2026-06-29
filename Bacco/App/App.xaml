@@ -1,0 +1,3 @@
+<Application x:Class="App"
+ StartupUri="MainWindow.xaml">
+</Application>
