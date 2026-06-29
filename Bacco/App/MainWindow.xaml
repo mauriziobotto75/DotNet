@@ -1,0 +1,18 @@
+<Window x:Class="MainWindow"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+
+    <TabControl>
+        <TabItem Header="Clienti">
+            <local:ClienteView/>
+        </TabItem>
+
+        <TabItem Header="Comande">
+            <local:ComandaView/>
+        </TabItem>
+
+        <TabItem Header="Pagamenti">
+            <local:PagamentoView/>
+        </TabItem>
+    </TabControl>
+
+</Window>
