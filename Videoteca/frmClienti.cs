@@ -83,3 +83,23 @@ public bool InserisciCliente(
 
     return n > 0;
 }
+// Gestione della cancellazione del cliente sul bottone Elimina   //
+public bool EliminaCliente(int idcliente)
+{
+    SqlConnection cn = new DBConnection().Connection;
+
+    string sql =
+        "DELETE FROM tbclienti WHERE idcliente=@id";
+
+    SqlCommand cmd = new SqlCommand(sql, cn);
+
+    cmd.Parameters.AddWithValue("@id", idcliente);
+
+    cn.Open();
+
+    int n = cmd.ExecuteNonQuery();
+
+    cn.Close();
+
+    return n > 0;
+}
