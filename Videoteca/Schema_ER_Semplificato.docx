@@ -1,0 +1,18 @@
+COMUNE (1) ----------- (N) CLIENTE
+
+GENERE (1) ---------- (N) VIDEO
+
+PRODUTTORE (1) ------ (N) VIDEO
+
+VIDEO (N) ----------- (N) FORMATO
+       \             /
+        \           /
+          TBCOPIE
+
+CLIENTE (N)
+            \
+             \
+              > TBMOVVIDEO < VIDEO (N)
+             /
+            /
+FORMATO (N)
