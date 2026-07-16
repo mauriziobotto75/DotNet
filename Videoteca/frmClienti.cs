@@ -55,3 +55,31 @@ public bool InserisciCliente(
 
     return n > 0;
 }
+// Gestione del CRUD frmCLienti public bool ModificaCliente(
+    int idcliente,
+    string telefono,
+    string cellulare,
+    string email)
+{
+    SqlConnection cn = new DBConnection().Connection;
+
+    string sql =
+    @"UPDATE tbclienti
+      SET telefonoc=@telefono,
+          cellularec=@cellulare,
+          emailc=@email
+      WHERE idcliente=@id";
+
+    SqlCommand cmd = new SqlCommand(sql, cn);
+
+    cmd.Parameters.AddWithValue("@telefono", telefono);
+    cmd.Parameters.AddWithValue("@cellulare", cellulare);
+    cmd.Parameters.AddWithValue("@email", email);
+    cmd.Parameters.AddWithValue("@id", idcliente);
+
+    cn.Open();
+    int n = cmd.ExecuteNonQuery();
+    cn.Close();
+
+    return n > 0;
+}
