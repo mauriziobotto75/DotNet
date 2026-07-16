@@ -90,4 +90,76 @@ public bool NoleggiaVideo(
         cn.Close();
         return false;
     }
+}  // Gestione della restituzione video  public bool RestituisciVideo(int movimento)
+{
+    SqlConnection cn = new DBConnection().Connection;
+
+    cn.Open();
+
+    SqlTransaction tr =
+        cn.BeginTransaction();
+
+    try
+    {
+        SqlCommand sel =
+        new SqlCommand(
+        @"SELECT ksvideo,
+                 ksformato
+          FROM tbmovvideo
+          WHERE idmovvideo=@id",
+        cn, tr);
+
+        sel.Parameters.AddWithValue("@id", movimento);
+
+        SqlDataReader dr =
+            sel.ExecuteReader();
+
+        dr.Read();
+
+        int video =
+            Convert.ToInt32(dr["ksvideo"]);
+
+        int formato =
+            Convert.ToInt32(dr["ksformato"]);
+
+        dr.Close();
+
+        SqlCommand upd =
+        new SqlCommand(
+        @"UPDATE tbmovvideo
+          SET datareso=GETDATE()
+          WHERE idmovvideo=@id",
+        cn, tr);
+
+        upd.Parameters.AddWithValue("@id", movimento);
+
+        upd.ExecuteNonQuery();
+
+        SqlCommand copie =
+        new SqlCommand(
+        @"UPDATE tbcopie
+          SET disponibili=disponibili+1,
+              noleggiate=noleggiate-1
+          WHERE ksvideoc=@video
+          AND ksformatoc=@formato",
+        cn, tr);
+
+        copie.Parameters.AddWithValue("@video", video);
+        copie.Parameters.AddWithValue("@formato", formato);
+
+        copie.ExecuteNonQuery();
+
+        tr.Commit();
+
+        cn.Close();
+
+        return true;
+    }
+    catch
+    {
+        tr.Rollback();
+        cn.Close();
+
+        return false;
+    }
 }
