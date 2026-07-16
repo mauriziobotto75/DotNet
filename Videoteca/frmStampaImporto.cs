@@ -17,4 +17,4 @@ public decimal CalcolaImporto(
         (dataReso - dataNoleggio).Days + 1;
 
     return giorni * costoGiornaliero;
-}
+} // Aggiungi la gestione del form
