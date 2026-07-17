@@ -1,0 +1,55 @@
+Diagramma E/R VIDEOTECA con Chiavi Primarie
+COMUNE
+ PK idcomune
+ ------------------------
+ codice
+ comune
+ kssigla
+CLIENTE
+          1 ------ N
+ PK idcliente
+ FK kscomunec
+ ------------------------
+ cliente
+ indirizzoc
+ codicefiscalec
+ telefonoc
+ cellularec
+ emailc
+ documento
+ creditoresiduo
+GENERE (PK idgenere) 1 ------ N VIDEO (PK idvideo)
+PRODUTTORE (PK idproduttore) 1 ------ N VIDEO
+VIDEO
+ PK idvideo
+ FK ksgenere
+ FK ksproduttore
+ ------------------------
+ titolo
+ trama
+ regista
+ durata
+ annoproduzione
+ vietato
+FORMATO
+ PK idformato
+ ------------------------
+ formato
+ costonoleggio
+COPIE
+ PK/FK ksvideoc
+ PK/FK ksformatoc
+ ------------------------
+ disponibili
+ noleggiate
+VIDEO N ------ N FORMATO
+          tramite COPIE
+MOVIMENTO
+ PK idmovvideo
+ FK kscliente
+ FK ksvideo
+ FK ksformato
+ ------------------------
+ datanoleggio
+ datareso
+CLIENTE, VIDEO e FORMATO sono collegati tramite MOVIMENTO
