@@ -1,175 +1,128 @@
  using System;
+using System.Collections.Generic;
 using System.Data;
-using System.Drawing;
-using System.Windows.Forms;
+using System.Data.SqlClient;
 
-namespace Gestione_Amministratore.Forms
+namespace Gestione_Amministratore.Data
 {
-    // UI layout del form EmissioneBolle (controlli principali).
-    // Questa classe contiene solo la creazione dei controlli (analogamente al Designer).
-    public partial class EmissioneBolle : Form
+    public record BollettaInsertDto(int IdRata, decimal Importo, DateTime DataEmissione, string NumeroDocumento);
+
+    public class AdoGestioneRepository : IDisposable
     {
-        // Toolbar
-        private ToolStrip toolStrip;
-        private ToolStripButton tsbNew;
-        private ToolStripButton tsbSave;
-        private ToolStripButton tsbPrint;
+        private readonly string _connectionString;
+        private SqlConnection? _connection;
 
-        // Top selectors
-        private Label lblStudio;
-        private ComboBox cmbStudio;
-        private Label lblImmobile;
-        private ComboBox cmbImmobile;
-
-        // Modulo / Tipo / Nome
-        private GroupBox grpModulo;
-        private Label lblTipo;
-        private ComboBox cmbTipoModulo;
-        private Label lblNomeModulo;
-        private ComboBox cmbNomeModulo;
-        private Button btnSelectModulo;
-        private Button btnAddModulo;
-
-        // C/C
-        private Label lblCC;
-        private ComboBox cmbCC;
-        private Button btnSelectCC;
-        private Button btnAddCC;
-
-        // Dates / Numero Emesso
-        private Label lblDataEmissione;
-        private DateTimePicker dtpDataEmissione;
-        private Label lblDataScadenza;
-        private DateTimePicker dtpDataScadenza;
-        private Label lblNumeroEmesso;
-        private TextBox txtNumeroEmesso;
-
-        // Pagamenti (DataGridView)
-        private GroupBox grpPagamenti;
-        private DataGridView dgvPagamenti;
-        private Button btnAddPagamento;
-        private Button btnRemovePagamento;
-
-        // Totali / Spese / Bolli
-        private CheckBox chkStampaDifferenza;
-        private Label lblSpeseIncasso;
-        private TextBox txtSpeseIncasso;
-        private Label lblBolli;
-        private TextBox txtBolli;
-        private Label lblTotale;
-
-        // Opzioni stampa
-        private CheckBox chkStampaZero;
-        private CheckBox chkStampaNegativi;
-        private CheckBox chkSaltoPagina;
-
-        // Internal data
-        internal DataTable PagamentiTable;
-
-        public EmissioneBolle()
+        public AdoGestioneRepository(string connectionString)
         {
-            InitializeComponent();
+            _connectionString = connectionString ?? throw new ArgumentNullException(nameof(connectionString));
         }
 
-        private void InitializeComponent()
+        private SqlConnection Connection => _connection ??= new SqlConnection(_connectionString);
+
+        public DataTable GetAmministratori()
         {
-            this.Text = "Emissione Bollette";
-            this.Size = new Size(900, 620);
-            this.StartPosition = FormStartPosition.CenterParent;
+            const string sql = "SELECT IdAmministratore, RagioneSociale FROM dbo.Amministratori ORDER BY RagioneSociale";
+            return ExecuteQuery(sql);
+        }
 
-            // ToolStrip
-            toolStrip = new ToolStrip();
-            tsbNew = new ToolStripButton("Nuovo");
-            tsbSave = new ToolStripButton("Salva");
-            tsbPrint = new ToolStripButton("Stampa");
-            toolStrip.Items.AddRange(new ToolStripItem[] { tsbNew, tsbSave, tsbPrint });
-            toolStrip.Dock = DockStyle.Top;
-            this.Controls.Add(toolStrip);
+        public DataTable GetCondominiByAmministratore(int idAmministratore)
+        {
+            const string sql = "SELECT IdCondominio, Nome FROM dbo.Condomini WHERE IdAmministratore = @id ORDER BY Nome";
+            return ExecuteQuery(sql, ("@id", idAmministratore));
+        }
 
-            // Top selectors panel
-            Panel topPanel = new Panel { Dock = DockStyle.Top, Height = 40 };
-            lblStudio = new Label { Text = "Studio:", Left = 8, Top = 10, Width = 50 };
-            cmbStudio = new ComboBox { Left = 60, Top = 6, Width = 200, DropDownStyle = ComboBoxStyle.DropDownList };
-            lblImmobile = new Label { Text = "Immobile:", Left = 270, Top = 10, Width = 60 };
-            cmbImmobile = new ComboBox { Left = 335, Top = 6, Width = 350, DropDownStyle = ComboBoxStyle.DropDownList };
-            topPanel.Controls.AddRange(new Control[] { lblStudio, cmbStudio, lblImmobile, cmbImmobile });
-            this.Controls.Add(topPanel);
+        public DataTable GetUnitaByCondominio(int idCondominio)
+        {
+            const string sql = "SELECT IdUnita, Scala, Interno FROM dbo.UnitaImmobiliari WHERE IdCondominio = @id ORDER BY Scala, Interno";
+            return ExecuteQuery(sql, ("@id", idCondominio));
+        }
 
-            // Modulo group
-            grpModulo = new GroupBox { Text = "Modulo", Left = 8, Top = 48, Width = 560, Height = 100 };
-            lblTipo = new Label { Text = "Tipo:", Left = 8, Top = 24, Width = 50 };
-            cmbTipoModulo = new ComboBox { Left = 60, Top = 20, Width = 140, DropDownStyle = ComboBoxStyle.DropDownList };
-            lblNomeModulo = new Label { Text = "Nome:", Left = 210, Top = 24, Width = 50 };
-            cmbNomeModulo = new ComboBox { Left = 260, Top = 20, Width = 200, DropDownStyle = ComboBoxStyle.DropDownList };
-            btnSelectModulo = new Button { Text = "...", Left = 465, Top = 18, Width = 30 };
-            btnAddModulo = new Button { Text = "+", Left = 505, Top = 18, Width = 30 };
+        public DataTable GetRateNonPagateByUnita(int idUnita)
+        {
+            const string sql = @"
+SELECT r.IdRata, g.Descrizione AS Gestione, 'Rata' AS TipoPag, 
+       'Rata del ' + CONVERT(nvarchar(10), r.Scadenza, 103) AS Descrizione, r.Importo
+FROM dbo.Rate r
+JOIN dbo.Gestioni g ON g.IdGestione = r.IdGestione
+WHERE r.IdUnita = @idUnita AND r.Pagata = 0
+ORDER BY r.Scadenza";
+            return ExecuteQuery(sql, ("@idUnita", idUnita));
+        }
 
-            lblCC = new Label { Text = "C/C:", Left = 8, Top = 56, Width = 30 };
-            cmbCC = new ComboBox { Left = 60, Top = 52, Width = 300, DropDownStyle = ComboBoxStyle.DropDownList };
-            btnSelectCC = new Button { Text = "...", Left = 365, Top = 50, Width = 30 };
-            btnAddCC = new Button { Text = "+", Left = 405, Top = 50, Width = 30 };
+        public int GetUltimoNumeroBolletta()
+        {
+            const string sql = "SELECT TOP 1 IdBolletta FROM dbo.Bollette ORDER BY IdBolletta DESC";
+            var dt = ExecuteQuery(sql);
+            if (dt.Rows.Count == 0) return 0;
+            return Convert.ToInt32(dt.Rows[0]["IdBolletta"]);
+        }
 
-            grpModulo.Controls.AddRange(new Control[] {
-                lblTipo, cmbTipoModulo, lblNomeModulo, cmbNomeModulo, btnSelectModulo, btnAddModulo,
-                lblCC, cmbCC, btnSelectCC, btnAddCC
-            });
-            this.Controls.Add(grpModulo);
+        public void SaveBolletteAndMarkRatePaid(IEnumerable<BollettaInsertDto> bollette)
+        {
+            if (bollette == null) return;
+            using var conn = Connection;
+            conn.Open();
+            using var tx = conn.BeginTransaction();
+            try
+            {
+                foreach (var b in bollette)
+                {
+                    using var cmd = new SqlCommand(
+                        "INSERT INTO dbo.Bollette (IdRata, DataEmissione, NumeroDocumento, Importo) VALUES (@IdRata, @DataEmissione, @NumeroDocumento, @Importo); SELECT SCOPE_IDENTITY();",
+                        conn, tx);
+                    cmd.Parameters.AddWithValue("@IdRata", b.IdRata);
+                    cmd.Parameters.AddWithValue("@DataEmissione", b.DataEmissione.Date);
+                    cmd.Parameters.AddWithValue("@NumeroDocumento", b.NumeroDocumento ?? string.Empty);
+                    cmd.Parameters.AddWithValue("@Importo", b.Importo);
+                    cmd.ExecuteScalar();
 
-            // Dates and numero emesso panel
-            Panel datesPanel = new Panel { Left = 576, Top = 48, Width = 300, Height = 100 };
-            lblDataEmissione = new Label { Text = "Data Emissione:", Left = 8, Top = 8, Width = 100 };
-            dtpDataEmissione = new DateTimePicker { Left = 110, Top = 4, Width = 170, Format = DateTimePickerFormat.Short };
-            lblDataScadenza = new Label { Text = "Data Scadenza:", Left = 8, Top = 36, Width = 100 };
-            dtpDataScadenza = new DateTimePicker { Left = 110, Top = 32, Width = 170, Format = DateTimePickerFormat.Short };
-            lblNumeroEmesso = new Label { Text = "Ultimo Numero Emesso:", Left = 8, Top = 64, Width = 140 };
-            txtNumeroEmesso = new TextBox { Left = 150, Top = 60, Width = 130, ReadOnly = true };
+                    // se vuoi segnare la rata come pagata:
+                    using var upd = new SqlCommand("UPDATE dbo.Rate SET Pagata = 1 WHERE IdRata = @IdRata", conn, tx);
+                    upd.Parameters.AddWithValue("@IdRata", b.IdRata);
+                    upd.ExecuteNonQuery();
+                }
 
-            datesPanel.Controls.AddRange(new Control[] { lblDataEmissione, dtpDataEmissione, lblDataScadenza, dtpDataScadenza, lblNumeroEmesso, txtNumeroEmesso });
-            this.Controls.Add(datesPanel);
+                tx.Commit();
+            }
+            catch
+            {
+                tx.Rollback();
+                throw;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
 
-            // Pagamenti group (DataGridView)
-            grpPagamenti = new GroupBox { Text = "Elenco Pagamenti", Left = 8, Top = 156, Width = 868, Height = 300 };
-            dgvPagamenti = new DataGridView { Left = 8, Top = 20, Width = 840, Height = 240, AllowUserToAddRows = false, RowHeadersVisible = false };
-            btnAddPagamento = new Button { Text = "Aggiungi", Left = 8, Top = 265, Width = 90 };
-            btnRemovePagamento = new Button { Text = "Rimuovi", Left = 106, Top = 265, Width = 90 };
-            grpPagamenti.Controls.AddRange(new Control[] { dgvPagamenti, btnAddPagamento, btnRemovePagamento });
-            this.Controls.Add(grpPagamenti);
+        private DataTable ExecuteQuery(string sql, params (string name, object value)[] parameters)
+        {
+            var dt = new DataTable();
+            using var cmd = new SqlCommand(sql);
+            using var da = new SqlDataAdapter(cmd);
+            cmd.Connection = Connection;
+            foreach (var p in parameters)
+            {
+                cmd.Parameters.AddWithValue(p.name, p.value ?? DBNull.Value);
+            }
 
-            // Totals and options panel
-            Panel bottomPanel = new Panel { Left = 8, Top = 470, Width = 868, Height = 120 };
-            chkStampaDifferenza = new CheckBox { Text = "Stampa differenza tra Dovuto e Pagato", Left = 8, Top = 8, Width = 260 };
-            lblSpeseIncasso = new Label { Text = "Spese Incasso:", Left = 8, Top = 36, Width = 100 };
-            txtSpeseIncasso = new TextBox { Left = 110, Top = 32, Width = 80, Text = "0.00" };
-            lblBolli = new Label { Text = "Bolli:", Left = 200, Top = 36, Width = 50 };
-            txtBolli = new TextBox { Left = 245, Top = 32, Width = 80, Text = "0.00" };
-            lblTotale = new Label { Text = "Totale: 0.00", Left = 350, Top = 36, Width = 200 };
+            Connection.Open();
+            try
+            {
+                da.Fill(dt);
+            }
+            finally
+            {
+                Connection.Close();
+            }
 
-            chkStampaZero = new CheckBox { Text = "Stampa Boll. con Importi a Zero", Left = 8, Top = 64, Width = 200 };
-            chkStampaNegativi = new CheckBox { Text = "Stampa Boll. con Importi Negativi", Left = 210, Top = 64, Width = 250 };
-            chkSaltoPagina = new CheckBox { Text = "Salto pagina per ogni bolletta", Left = 470, Top = 64, Width = 220 };
+            return dt;
+        }
 
-            bottomPanel.Controls.AddRange(new Control[] {
-                chkStampaDifferenza, lblSpeseIncasso, txtSpeseIncasso, lblBolli, txtBolli, lblTotale,
-                chkStampaZero, chkStampaNegativi, chkSaltoPagina
-            });
-            this.Controls.Add(bottomPanel);
-
-            // Event wiring (basic)
-            this.Load += EmissioneBolle_Load;
-            tsbNew.Click += tsbNew_Click;
-            tsbSave.Click += tsbSave_Click;
-            tsbPrint.Click += tsbPrint_Click;
-            cmbStudio.SelectedIndexChanged += cmbStudio_SelectedIndexChanged;
-            cmbImmobile.SelectedIndexChanged += cmbImmobile_SelectedIndexChanged;
-            btnAddPagamento.Click += btnAddPagamento_Click;
-            btnRemovePagamento.Click += btnRemovePagamento_Click;
-            dgvPagamenti.CellValueChanged += dgvPagamenti_CellValueChanged;
-            dtpDataEmissione.ValueChanged += dtpDataEmissione_ValueChanged;
-            dtpDataScadenza.ValueChanged += dtpDataScadenza_ValueChanged;
-            txtSpeseIncasso.TextChanged += txtSpeseIncasso_TextChanged;
-            txtBolli.TextChanged += txtBolli_TextChanged;
-            btnSelectModulo.Click += btnSelectModulo_Click;
-            btnSelectCC.Click += btnSelectCC_Click;
+        public void Dispose()
+        {
+            _connection?.Dispose();
+            _connection = null;
         }
     }
 }
