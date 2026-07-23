@@ -7,7 +7,17 @@ namespace GestioneAmministratori
 {
     public partial class FormParcella : Form
     {
-        private string _connectionString = @"Server=YOUR_SERVER;Database=Amministratori_Condominio;Integrated Security=true;";
+        private string _connectionString = @"Server=<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <startup> 
+        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.7.2" />
+    </startup>
+    <connectionStrings>
+        <add name="AmministratoriDB" 
+             connectionString="Server='corp/mbotto/ITLIK6066001072';Database=Amministratori_Condominio;Integrated Security=true;" 
+             providerName="System.Data.SqlClient" />
+    </connectionStrings>
+</configuration>;Database=Amministratori_Condominio;Integrated Security=true;";
         private int _idAmministratore = 0;
         private int _idCondominio = 0;
 
