@@ -16,7 +16,17 @@ namespace MyApp.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // Replace with your SQL Server connection string
-            optionsBuilder.UseSqlServer("Server=.;Database=Amministratori;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer("Server=<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <startup> 
+        <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.7.2" />
+    </startup>
+    <connectionStrings>
+        <add name="AmministratoriDB" 
+             connectionString="Server='corp/mbotto/ITLIK6066001072';Database=Amministratori_Condominio;Integrated Security=true;" 
+             providerName="System.Data.SqlClient" />
+    </connectionStrings>
+</configuration>;Database=Amministratori;Trusted_Connection=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
