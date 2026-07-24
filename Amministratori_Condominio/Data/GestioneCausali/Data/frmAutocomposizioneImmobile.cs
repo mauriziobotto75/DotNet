@@ -146,7 +146,7 @@ namespace Amministratori
 
             return true;
         }
-
+// Codice del bottone di salvataggio dell'immobile
         private void SalvaImmobile()
         {
             SqlConnection cn =
@@ -250,7 +250,48 @@ namespace Amministratori
         {
             tabWizard.SelectedIndex =
                 tabWizard.SelectedIndex - 1;
-        }
+        }   private void btnFine_Click(
+    object sender,
+    EventArgs e)
+{
+    SqlConnection cn =
+        new SqlConnection(ConnectionString);
+
+    string sql =
+    @"INSERT INTO UnitaImmobiliari
+    (
+        IdCondominio,
+        Interno,
+        Note
+    )
+    VALUES
+    (
+        @IdCondominio,
+        @Interno,
+        @Note
+    )";
+
+    SqlCommand cmd =
+        new SqlCommand(sql, cn);
+
+    cmd.Parameters.AddWithValue(
+        "@IdCondominio",
+        m_IdCondominio);
+
+    cmd.Parameters.AddWithValue(
+        "@Interno",
+        txtCodice.Text);
+
+    cmd.Parameters.AddWithValue(
+        "@Note",
+        txtDescrizione.Text);
+
+    cn.Open();
+
+    cmd.ExecuteNonQuery();
+
+    cn.Close();
+}
 
         private void btnAvanti_Click(
             object sender,
