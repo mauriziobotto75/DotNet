@@ -222,4 +222,57 @@ private void btnAvanti_Click(
             quota,
             mq);
     }
+}  private void RipartizionePerConsumi()
+{
+    decimal importoSpesa =
+        LeggiImportoSpesa();
+
+    SqlConnection cn =
+        new DBConnection().Connection;
+
+    string sql =
+    @"
+    SELECT
+        IdUnita,
+        SUM(Valore) Consumo
+    FROM LettureContatori
+    GROUP BY IdUnita";
+
+    SqlDataAdapter da =
+        new SqlDataAdapter(sql, cn);
+
+    DataTable dt =
+        new DataTable();
+
+    da.Fill(dt);
+
+    decimal totaleConsumo = 0;
+
+    foreach(DataRow r in dt.Rows)
+    {
+        totaleConsumo +=
+            Convert.ToDecimal(
+                r["Consumo"]);
+    }
+
+    foreach(DataRow r in dt.Rows)
+    {
+        int idUnita =
+            Convert.ToInt32(
+                r["IdUnita"]);
+
+        decimal consumo =
+            Convert.ToDecimal(
+                r["Consumo"]);
+
+        decimal quota =
+            importoSpesa *
+            consumo /
+            totaleConsumo;
+
+        SalvaRipartizione(
+            idUnita,
+            quota,
+            consumo);
+    }
 }
