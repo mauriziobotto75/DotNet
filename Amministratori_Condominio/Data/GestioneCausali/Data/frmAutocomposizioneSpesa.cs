@@ -65,4 +65,61 @@ private void btnAvanti_Click(
     cn.Close();
 
     return importo;
+} private void RipartizionePerMillesimi()
+{
+    decimal importoSpesa =
+        LeggiImportoSpesa();
+
+    SqlConnection cn =
+        new DBConnection().Connection;
+
+    string sql =
+    @"
+    SELECT
+        R.IdUnita,
+        R.ValoreMillesimale
+    FROM RigheTabellaMillesimale R
+    INNER JOIN TabelleMillesimali T
+        ON T.IdTabella=R.IdTabella
+    WHERE T.IdCondominio=@IdCondominio";
+
+    SqlDataAdapter da =
+        new SqlDataAdapter(sql, cn);
+
+    da.SelectCommand.Parameters.AddWithValue(
+        "@IdCondominio",
+        _idCondominio);
+
+    DataTable dt =
+        new DataTable();
+
+    da.Fill(dt);
+
+    decimal totaleMillesimi = 0;
+
+    foreach(DataRow r in dt.Rows)
+    {
+        totaleMillesimi +=
+           Convert.ToDecimal(
+              r["ValoreMillesimale"]);
+    }
+
+    foreach(DataRow r in dt.Rows)
+    {
+        int idUnita =
+            Convert.ToInt32(r["IdUnita"]);
+
+        decimal mm =
+            Convert.ToDecimal(
+                r["ValoreMillesimale"]);
+
+        decimal quota =
+            (importoSpesa * mm) /
+            totaleMillesimi;
+
+        SalvaRipartizione(
+            idUnita,
+            quota,
+            mm);
+    }
 }
