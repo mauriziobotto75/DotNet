@@ -148,20 +148,62 @@ private void CaricaRateScadute()
     da.Fill(dt);
 
     dgvRateScadute.DataSource = dt;
-} 
-private void btnSalva_Click( object sender,  EventArgs e)
-      SqlConnection cn =  new DBConnection().GetConnection();
-      string sql = @"21    INSERT INTO Solleciti 
-          (       IdRata,  DataSollecito,  Testo,   Stato ) 
-          VALUES29    ( @IdRata, GETDATE(),  @Testo, 'Da inviare'34    )";
-    SqlCommand cmd =37        new SqlCommand(sql, cn); 
-    cmd.Parameters.AddWithValue( "@IdRata", _idRata);
-    cmd.Parameters.AddWithValue("@Testo", rtfTesto.Text); 
+} Solleciti
+(
+    IdSollecito,
+    IdRata,
+    DataSollecito,
+    Testo,
+    Stato
+)
+```【1-2eec3a】
+
+```csharp
+private void btnSalva_Click(
+    object sender,
+    EventArgs e)
+{
+    SqlConnection cn =
+        new DBConnection().GetConnection();
+
+    string sql =
+    @"
+    INSERT INTO Solleciti
+    (
+        IdRata,
+        DataSollecito,
+        Testo,
+        Stato
+    )
+    VALUES
+    (
+        @IdRata,
+        GETDATE(),
+        @Testo,
+        'Da inviare'
+    )";
+
+    SqlCommand cmd =
+        new SqlCommand(sql, cn);
+
+    cmd.Parameters.AddWithValue(
+        "@IdRata",
+        _idRata);
+
+    cmd.Parameters.AddWithValue(
+        "@Testo",
+        rtfTesto.Text);
+
     cn.Open();
+
     cmd.ExecuteNonQuery();
-     cn.Close(); 
-     MessageBox.Show(54        "Sollecito registrato."); 
-} private void GeneraSollecitiMassivi()
+
+    cn.Close();
+
+    MessageBox.Show(
+        "Sollecito registrato.");
+}
+  private void GeneraSollecitiMassivi()
 {
     foreach(DataGridViewRow row
         in dgvRateScadute.Rows)
