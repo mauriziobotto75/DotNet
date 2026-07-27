@@ -148,4 +148,17 @@ private void CaricaRateScadute()
     da.Fill(dt);
 
     dgvRateScadute.DataSource = dt;
-} private void btnSalva_Click(13    object sender,14    EventArgs e)15{16    SqlConnection cn =17        new DBConnection().GetConnection();18 19    string sql =20    @"21    INSERT INTO Solleciti22    (23        IdRata,24        DataSollecito,25        Testo,26        Stato27    )28    VALUES29    (30        @IdRata,31        GETDATE(),32        @Testo,33        'Da inviare'34    )";35 36    SqlCommand cmd =37        new SqlCommand(sql, cn);38 39    cmd.Parameters.AddWithValue(40        "@IdRata",41        _idRata);42 43    cmd.Parameters.AddWithValue(44        "@Testo",45        rtfTesto.Text);46 47    cn.Open();48 49    cmd.ExecuteNonQuery();50 51    cn.Close();52 53    MessageBox.Show(54        "Sollecito registrato.");55}
+} 
+private void btnSalva_Click( object sender,  EventArgs e)
+      SqlConnection cn =  new DBConnection().GetConnection();
+      string sql = @"21    INSERT INTO Solleciti 
+          (       IdRata,  DataSollecito,  Testo,   Stato ) 
+          VALUES29    ( @IdRata, GETDATE(),  @Testo, 'Da inviare'34    )";
+    SqlCommand cmd =37        new SqlCommand(sql, cn); 
+    cmd.Parameters.AddWithValue( "@IdRata", _idRata);
+    cmd.Parameters.AddWithValue("@Testo", rtfTesto.Text); 
+    cn.Open();
+    cmd.ExecuteNonQuery();
+     cn.Close(); 
+     MessageBox.Show(54        "Sollecito registrato."); 
+}
