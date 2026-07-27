@@ -39,4 +39,30 @@ private void btnAvanti_Click(
 
     MessageBox.Show(
         "Ripartizione completata.");
+} private decimal LeggiImportoSpesa()
+{
+    SqlConnection cn =
+        new DBConnection().Connection;
+
+    string sql =
+    @"SELECT Importo
+      FROM MovimentiContabili
+      WHERE IdMovimento=@IdMovimento";
+
+    SqlCommand cmd =
+        new SqlCommand(sql, cn);
+
+    cmd.Parameters.AddWithValue(
+        "@IdMovimento",
+        _idMovimento);
+
+    cn.Open();
+
+    decimal importo =
+        Convert.ToDecimal(
+            cmd.ExecuteScalar());
+
+    cn.Close();
+
+    return importo;
 }
