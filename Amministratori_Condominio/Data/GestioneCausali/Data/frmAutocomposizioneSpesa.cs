@@ -13,3 +13,30 @@ public partial class frmAutocomposizioneSpesa : Form
         _idCondominio = idCondominio;
     }
 }
+private void btnAvanti_Click(
+    object sender,
+    EventArgs e)
+{
+    if(chkTabelleMillesimali.Checked)
+    {
+        RipartizionePerMillesimi();
+    }
+
+    if(chkMetriQuadri.Checked)
+    {
+        RipartizionePerMetriQuadri();
+    }
+
+    if(chkContatori.Checked)
+    {
+        RipartizionePerConsumi();
+    }
+
+    if(chkAPorta.Checked)
+    {
+        RipartizionePerUnita();
+    }
+
+    MessageBox.Show(
+        "Ripartizione completata.");
+}
