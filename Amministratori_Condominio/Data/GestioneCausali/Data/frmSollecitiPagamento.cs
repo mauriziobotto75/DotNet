@@ -202,6 +202,66 @@ private void btnSalva_Click(
 
     MessageBox.Show(
         "Sollecito registrato.");
+}  private void CaricaDatiSollecito()
+{
+    SqlConnection cn =
+        new DBConnection().GetConnection();
+
+    string sql =
+    @"
+    SELECT TOP 1
+
+        P.Nome,
+        P.Cognome,
+        P.Indirizzo,
+        P.Comune,
+        P.CAP,
+
+        R.Importo
+
+    FROM Rate R
+
+    INNER JOIN UnitaImmobiliari U
+        ON U.IdUnita=R.IdUnita
+
+    INNER JOIN OccupazioniUnita O
+        ON O.IdUnita=U.IdUnita
+
+    INNER JOIN Persone P
+        ON P.IdPersona=O.IdPersona
+
+    WHERE R.IdRata=@IdRata
+    ";
+
+    SqlCommand cmd =
+        new SqlCommand(sql, cn);
+
+    cmd.Parameters.AddWithValue(
+        "@IdRata",
+        _idRata);
+
+    cn.Open();
+
+    SqlDataReader dr =
+        cmd.ExecuteReader();
+
+    if(dr.Read())
+    {
+        txtDestinatario.Text =
+            dr["Cognome"] + " " +
+            dr["Nome"];
+
+        txtIndirizzo.Text =
+            dr["Indirizzo"].ToString();
+
+        txtImporto.Text =
+            Convert.ToDecimal(
+            dr["Importo"])
+            .ToString("N2");
+    }
+
+    dr.Close();
+    cn.Close();
 }
   private void GeneraSollecitiMassivi()
 {
