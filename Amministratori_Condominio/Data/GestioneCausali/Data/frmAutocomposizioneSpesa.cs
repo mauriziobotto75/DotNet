@@ -170,4 +170,56 @@ private void btnAvanti_Click(
     cmd.ExecuteNonQuery();
 
     cn.Close();
+}private void RipartizionePerMetriQuadri()
+{
+    decimal importoSpesa =
+        LeggiImportoSpesa();
+
+    SqlConnection cn =
+        new DBConnection().Connection;
+
+    string sql =
+    @"
+    SELECT
+        IdUnita,
+        Superficie
+    FROM UnitaImmobiliari";
+
+    SqlDataAdapter da =
+        new SqlDataAdapter(sql, cn);
+
+    DataTable dt =
+        new DataTable();
+
+    da.Fill(dt);
+
+    decimal totaleMq = 0;
+
+    foreach(DataRow r in dt.Rows)
+    {
+        totaleMq +=
+           Convert.ToDecimal(
+                r["Superficie"]);
+    }
+
+    foreach(DataRow r in dt.Rows)
+    {
+        int idUnita =
+            Convert.ToInt32(
+                r["IdUnita"]);
+
+        decimal mq =
+            Convert.ToDecimal(
+                r["Superficie"]);
+
+        decimal quota =
+            importoSpesa *
+            mq /
+            totaleMq;
+
+        SalvaRipartizione(
+            idUnita,
+            quota,
+            mq);
+    }
 }
