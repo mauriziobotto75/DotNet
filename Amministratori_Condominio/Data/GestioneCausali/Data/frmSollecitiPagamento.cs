@@ -188,3 +188,16 @@ private void btnSalva_Click( object sender,  EventArgs e)
                 Color.LightPink;
     }
 }
+private int _idRata;
+
+private void dgvRateScadute_CellClick(
+    object sender,
+    DataGridViewCellEventArgs e)
+{
+    _idRata =
+      Convert.ToInt32(
+      dgvRateScadute.Rows[e.RowIndex]
+      .Cells["IdRata"].Value);
+
+    CaricaDatiSollecito();
+}
