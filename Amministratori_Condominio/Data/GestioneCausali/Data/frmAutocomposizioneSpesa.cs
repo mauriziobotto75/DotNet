@@ -275,4 +275,34 @@ private void btnAvanti_Click(
             quota,
             consumo);
     }
+}  private void RipartizionePerUnita()
+{
+    decimal importo =
+        LeggiImportoSpesa();
+
+    SqlConnection cn =
+        new DBConnection().Connection;
+
+    string sql =
+    @"SELECT IdUnita
+      FROM UnitaImmobiliari";
+
+    SqlDataAdapter da =
+        new SqlDataAdapter(sql, cn);
+
+    DataTable dt =
+        new DataTable();
+
+    da.Fill(dt);
+
+    decimal quota =
+        importo / dt.Rows.Count;
+
+    foreach(DataRow r in dt.Rows)
+    {
+        SalvaRipartizione(
+            Convert.ToInt32(r["IdUnita"]),
+            quota,
+            0);
+    }
 }
