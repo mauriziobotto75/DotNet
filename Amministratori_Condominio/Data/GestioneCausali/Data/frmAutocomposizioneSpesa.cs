@@ -305,4 +305,9 @@ private void btnAvanti_Click(
             quota,
             0);
     }
+}  private void btnAbbandona_Click(
+    object sender,
+    EventArgs e)
+{
+    this.Close();
 }
