@@ -122,4 +122,52 @@ private void btnAvanti_Click(
             quota,
             mm);
     }
+}   private void SalvaRipartizione(
+    int idUnita,
+    decimal quota,
+    decimal millesimi)
+{
+    SqlConnection cn =
+        new DBConnection().Connection;
+
+    string sql =
+    @"INSERT INTO Ripartizioni
+      (
+          IdMovimento,
+          IdUnita,
+          Millesimi,
+          Importo
+      )
+      VALUES
+      (
+          @IdMovimento,
+          @IdUnita,
+          @Millesimi,
+          @Importo
+      )";
+
+    SqlCommand cmd =
+        new SqlCommand(sql, cn);
+
+    cmd.Parameters.AddWithValue(
+        "@IdMovimento",
+        _idMovimento);
+
+    cmd.Parameters.AddWithValue(
+        "@IdUnita",
+        idUnita);
+
+    cmd.Parameters.AddWithValue(
+        "@Millesimi",
+        millesimi);
+
+    cmd.Parameters.AddWithValue(
+        "@Importo",
+        quota);
+
+    cn.Open();
+
+    cmd.ExecuteNonQuery();
+
+    cn.Close();
 }
