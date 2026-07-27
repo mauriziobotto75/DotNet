@@ -161,4 +161,30 @@ private void btnSalva_Click( object sender,  EventArgs e)
     cmd.ExecuteNonQuery();
      cn.Close(); 
      MessageBox.Show(54        "Sollecito registrato."); 
+} private void GeneraSollecitiMassivi()
+{
+    foreach(DataGridViewRow row
+        in dgvRateScadute.Rows)
+    {
+        int idRata =
+          Convert.ToInt32(
+          row.Cells["IdRata"].Value);
+
+        GeneraSollecito(idRata);
+    }
+} private void dgvRateScadute_RowPrePaint(
+    object sender,
+    DataGridViewRowPrePaintEventArgs e)
+{
+    DateTime scadenza =
+        Convert.ToDateTime(
+         dgvRateScadute.Rows[e.RowIndex]
+         .Cells["Scadenza"].Value);
+
+    if(scadenza < DateTime.Today)
+    {
+        dgvRateScadute.Rows[e.RowIndex]
+            .DefaultCellStyle.BackColor =
+                Color.LightPink;
+    }
 }
