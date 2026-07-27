@@ -1,0 +1,12 @@
+DataGridView dgvRateScadute
+
+txtDestinatario
+txtIndirizzo
+txtImporto
+
+rtfTesto
+
+btnGenera
+btnStampa
+btnSalva
+btnChiudi
