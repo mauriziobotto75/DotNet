@@ -1,0 +1,30 @@
+using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using NormaLavoro.Data;
+#nullable disable
+namespace NormaLavoro.WPF.Migrations
+{
+    [DbContext(typeof(NormaLavoroContext))]
+    partial class NormaLavoroContextModelSnapshot : ModelSnapshot
+    {
+        protected override void BuildModel(ModelBuilder modelBuilder)
+        {
+            modelBuilder.HasAnnotation("ProductVersion", "8.0.0").HasAnnotation("Relational:MaxIdentifierLength", 128);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            modelBuilder.Entity("NormaLavoro.Models.Video", b =>
+            {
+                b.Property<int>("Id").ValueGeneratedOnAdd().HasColumnType("int");
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                b.Property<string>("Description").HasColumnType("nvarchar(max)");
+                b.Property<string>("FilePath").IsRequired().HasMaxLength(2000).HasColumnType("nvarchar(2000)");
+                b.Property<int?>("OrganizationId").HasColumnType("int");
+                b.Property<string>("Title").IsRequired().HasMaxLength(300).HasColumnType("nvarchar(300)");
+                b.Property<DateTime>("UploadedAt").HasColumnType("datetime2");
+                b.HasKey("Id"); b.ToTable("Videos");
+            });
+        }
+    }
+}
