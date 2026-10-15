@@ -1,0 +1,1 @@
+// PresenzeDbContext.cs - placeholder content
