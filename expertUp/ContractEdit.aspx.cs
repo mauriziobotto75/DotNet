@@ -139,6 +139,10 @@ namespace ExpertUp
             {
                 ErrorMessage.Text = "Could not save the contract. Check that its code is unique within the company and that the employee belongs to it. " + Server.HtmlEncode(ex.Message);
             }
+            catch (InvalidOperationException)
+            {
+                ErrorMessage.Text = "Could not save the contract because it no longer exists. Return to the contract list and choose a current record.";
+            }
         }
     }
 }

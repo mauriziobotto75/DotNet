@@ -60,6 +60,10 @@ namespace ExpertUp
             {
                 ErrorMessage.Text = "Could not save the company. Check that VAT number and tax code are unique, and review the database message. " + Server.HtmlEncode(ex.Message);
             }
+            catch (InvalidOperationException)
+            {
+                ErrorMessage.Text = "Could not save the company because it no longer exists. Return to the company list and choose a current record.";
+            }
         }
 
         private static string EmptyToNull(string value)

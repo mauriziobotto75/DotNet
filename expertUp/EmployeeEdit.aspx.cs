@@ -80,6 +80,10 @@ namespace ExpertUp
             {
                 ErrorMessage.Text = "Could not save the employee. Check that the selected company exists and the tax code is unique. " + Server.HtmlEncode(ex.Message);
             }
+            catch (InvalidOperationException)
+            {
+                ErrorMessage.Text = "Could not save the employee because it no longer exists. Return to the employee list and choose a current record.";
+            }
         }
 
         private static string EmptyToNull(string value)
