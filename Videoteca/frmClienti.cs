@@ -55,7 +55,8 @@ public bool InserisciCliente(
 
     return n > 0;
 }
-// Gestione del CRUD frmCLienti public bool ModificaCliente(
+// Gestione del CRUD frmCLienti public bool ModificaCliente
+(
     int idcliente,
     string telefono,
     string cellulare,
